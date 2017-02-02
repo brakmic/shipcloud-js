@@ -1,0 +1,6 @@
+{
+    "sandboxApiKey": "YOUR_SANDBOX_API_KEY",
+    "productionApiKey": "YOUR_PRODUCTION_API_KEY",
+    "debugMode": true,
+    "server": "localhost"
+}

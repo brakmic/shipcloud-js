@@ -35,3 +35,10 @@ jspm_packages
 
 # Optional REPL history
 .node_repl_history
+
+# dist (build target)
+dist/
+
+# ignore vs code settings
+
+.vscode/
