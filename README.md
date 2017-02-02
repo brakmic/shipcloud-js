@@ -21,7 +21,7 @@ However, to be able to communicate with the API you'll have [to register](https:
 
 ### Api Structure 
 
-The structure under *src/api/v1* strictly follows the original documentation. It comprises of three sub-directories named **calls**, **types** and **config**
+The structure under *src/api/v1* strictly follows the [original documentation](https://developers.shipcloud.io/reference/). It comprises of three sub-directories named **calls**, **types** and **config**
 
 #### Calls directory 
 
