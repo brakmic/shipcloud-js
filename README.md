@@ -124,4 +124,4 @@ Here's an example output:
 
 [MIT](https://github.com/brakmic/shipcloud-js/blob/master/LICENSE)
 
-<img src="https://i.imgsafe.org/36963687f2.png" width="150">
+<a href="http://www.advarics.net"><img src="https://i.imgsafe.org/36963687f2.png" width="150"></a>
