@@ -27,16 +27,15 @@ The structure under *src/api/v1* strictly follows the original documentation. It
 
 This directory contains all available API calls:
 
-```
-Addresses 
-Shipments
-Shipment Quotes
-Carriers
-Rates
-Pickup Requests
-Webhooks
-Trackers
-```
+- [Addresses](https://github.com/brakmic/shipcloud-js/blob/master/src/api/v1/types/address/address.ts) 
+- [Shipments](https://github.com/brakmic/shipcloud-js/blob/master/src/api/v1/types/shipment/shipment.ts)
+- [Shipment Quotes](https://github.com/brakmic/shipcloud-js/blob/master/src/api/v1/types/shipment-quote/shipment-quote.ts)
+- [Carriers](https://github.com/brakmic/shipcloud-js/blob/master/src/api/v1/types/responses/carrier-response.ts)
+- [Rates](https://github.com/brakmic/shipcloud-js/blob/master/src/api/v1/types/rate/rate.ts)
+- [Pickup Requests](https://github.com/brakmic/shipcloud-js/blob/master/src/api/v1/types/pickup/pickup.ts)
+- [Webhooks](https://github.com/brakmic/shipcloud-js/blob/master/src/api/v1/types/webhook/webhook.ts)
+- [Trackers](https://github.com/brakmic/shipcloud-js/blob/master/src/api/v1/types/tracker/tracker.ts)
+
 
 For example, the Address-Call comprises of three calls according to the docs: **create**, **index** and **read**
 
@@ -76,6 +75,10 @@ Api Auth
 ```
 
 Api-Auth class contains some helper methods for auth-key management. 
+
+### REST & JSON 
+
+All API calls go via the [RequestHelper](https://github.com/brakmic/shipcloud-js/blob/master/src/api/base/request-helper.ts) class. This class utilizes [node-fetch](https://www.npmjs.com/package/node-fetch) and [implements](https://github.com/brakmic/shipcloud-js/blob/master/src/api/base/request-helper.ts#L76) the GET, POST, PUT and DELETE requests.
 
 ### Building
 
@@ -120,3 +123,5 @@ Here's an example output:
 ### License 
 
 [MIT](https://github.com/brakmic/shipcloud-js/blob/master/LICENSE)
+
+<img src="https://i.imgsafe.org/36963687f2.png" width="150">
