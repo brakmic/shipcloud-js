@@ -8,10 +8,10 @@ This project provides a complete mapping of [ShipCloud](https://www.shipcloud.io
 
 We use these fine open source packages and languages:
 
-* TypeScript
-* WebPack 2
-* Lodash
-* node-fetch
+* [TypeScript](https://www.typescriptlang.org/)
+* [WebPack 2](https://webpack.js.org/)
+* [Lodash](https://lodash.com/)
+* [node-fetch](https://www.npmjs.com/package/node-fetch)
 
 ### Api Access Keys
 
