@@ -10,7 +10,6 @@ const doFetch = (url: string, headers: any = {}): Promise<any> => {
         })
         .then(response => {
             if (response.status >= 400) {
-                console.log(response);
                 throw new Error('Bad response from server');
             }
             return response.json();
