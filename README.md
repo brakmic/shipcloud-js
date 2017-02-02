@@ -1,6 +1,6 @@
 # ShipCloud API Binding for JavaScript
 
-This project provides a complete mapping of [ShipCloud](https://www.shipcloud.io/)'s API. At [advarics](http://www.advarics.net/) we're currently evaluating their services and because our applications rely heavily on web technologies we decided to create a proper JS API-binding. As far as we know there aren't any similar projects available. 
+This project provides a complete mapping of [ShipCloud](https://www.shipcloud.io/)'s API. At [advarics](http://www.advarics.net/) we're currently evaluating their services and because our applications rely heavily on web technologies we've decided to create a proper JS API-binding. As far as we know there aren't any similar projects available. 
 
 **This projects is still in development. At this time we're only utilizing the Address-Calls of the API. But soon it'll cover the missing parts of the API.**
 
