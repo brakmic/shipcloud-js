@@ -135,6 +135,12 @@ To test the binding in Node type:
 npm run start:client
 ``` 
 
+Now a special node instance called **ts-node** will load **index.ts** to boot the API client. 
+
+Here's an example output:
+
+<img src="https://i.imgsafe.org/366113e56e.png" width="450">
+
 #### Browser Client 
 
 To run the **index.html** from **dist** type:
@@ -144,12 +150,6 @@ npm run server:prod
 ```
 
 Then open [http://localhost:8080](http://localhost:8080) in your browser and follow the instructions on the page. 
-
-In this case a special node instance called **ts-node** will load **index.ts** from the project root and instantiate a small client script. This script initializes the API binding located in **src** and some of their API calls to query data from ShipCloud. 
-
-Here's an example output:
-
-<img src="https://i.imgsafe.org/366113e56e.png" width="450">
 
 **Notice**: It depends on *your current setup* what and if any data will be sent back from ShipCloud. Also, don't forget to check your API key in **src/config.json** if you experience any problems. 
 
