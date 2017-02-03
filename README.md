@@ -21,7 +21,14 @@ However, to be able to communicate with the API you'll have [to register](https:
 
 ### Api Structure 
 
-The structure under *src/api/v1* strictly follows the [original documentation](https://developers.shipcloud.io/reference/). It comprises of three sub-directories named **calls**, **types** and **config**
+The structure under *src/api/v1* strictly follows the [original documentation](https://developers.shipcloud.io/reference/). It comprises of these sub-directories:
+
+``` 
+calls
+config
+public
+types
+```
 
 #### Calls directory 
 
@@ -41,6 +48,24 @@ For example, the Address-Call comprises of three calls according to the docs: **
 
 Therefore we define these call-mappings in our Address class: **read**, **readAll** and **create**.
 In general these classes define the `high-level` portion of the complete API-binding as these don't touch more specific aspects like JSON or HTTP-Requests.
+
+#### Config directory 
+
+This directory contains elements which aren't described in the original docs.
+
+```
+Api Auth
+```
+
+Api-Auth class contains some helper methods for auth-key management. 
+
+#### Public directory 
+
+```
+ShipCloud
+```
+
+This directory contains the public ShipCloud interface. Clients should use it for type-safe API access.
 
 #### Types directory 
 
@@ -65,24 +90,6 @@ Webhook
 ```
 
 These classes are `DTOs` for easy transfer between client and server.
-
-#### Config directory 
-
-This directory contains elements which aren't described in the original docs.
-
-```
-Api Auth
-```
-
-Api-Auth class contains some helper methods for auth-key management. 
-
-#### Public directory 
-
-```
-ShipCloud
-```
-
-This directory contains the public ShipCloud interface. Clients should use it for type-safe API access.
 
 ### REST & JSON 
 
