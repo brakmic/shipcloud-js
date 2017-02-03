@@ -1,6 +1,7 @@
 import * as fetch from 'node-fetch';
 global['fetch'] = fetch;
 const config = require('./src/config.json');
+const jsBase64 = require('js-base64').Base64;
 import ShipCloudApi from './src/init/main';
 import { Address, AddressResponse,
          Shipment, ShipmentResponse,
@@ -100,7 +101,7 @@ class Client {
         // createAddress(composeDummyAddress()).then(res => {
         //     console.log(res);
         // });
-        // listKnownAddresses().then(res => console.log);
+        listKnownAddresses().then(res => console.log);
         // createShipment(composeShipment()).then(res => {
         //     console.log(res);
         // });
@@ -108,7 +109,7 @@ class Client {
 
     }
     private setup() {
-        api = new ShipCloudApi(config.sandboxApiKey);
+        api = new ShipCloudApi(jsBase64.encode(config.sandboxApiKey));
     }
 }
 

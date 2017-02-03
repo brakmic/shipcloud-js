@@ -1,11 +1,13 @@
 import * as _ from 'lodash';
 import { RequestHelper } from '../../base';
+const jsBase64 = require('js-base64').Base64;
 export class ApiAuth {
+    private apiKeyBase64: string;
     constructor(private apiKey = undefined, private isDebugMode: boolean = true) {
        this.setup();
     }
     public getKey() {
-        return this.apiKey;
+        return this.apiKeyBase64;
     }
     public isRunningInDebugMode() {
         return this.isDebugMode;
@@ -20,12 +22,15 @@ export class ApiAuth {
             RequestHelper.get('config.json').then(config => {
                 console.log(`Received config.json from server.`);
                 if (this.isDebugMode) {
-                    this.apiKey = config.sandboxApiKey;
+                    this.apiKeyBase64 = this.toBase64(config.sandboxApiKey);
                 } else {
-                    this.apiKey = config.productionApiKey;
+                    this.apiKeyBase64 = this.toBase64(config.productionApiKey);
                 }
             });
         }
         console.log(`Using key: ${this.apiKey}`);
+    }
+    private toBase64(key: string): string {
+        return jsBase64.encode(key);
     }
 }
