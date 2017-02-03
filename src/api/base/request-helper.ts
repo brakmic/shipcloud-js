@@ -4,9 +4,12 @@ declare var Request: any;
 declare var Headers: any;
 // use fetch for all API calls
 const doFetch = (url: string, headers: any = {}): Promise<any> => {
+    const allHeaders = _.assign({
+                                   'Content-Type': 'application/json;charset=utf-8'
+                                }, headers);
     return fetch(url, {
             method: 'GET',
-            headers: headers
+            headers: allHeaders
         })
         .then(response => {
             return response.json();
