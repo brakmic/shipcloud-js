@@ -1,5 +1,3 @@
-import * as fetch from 'node-fetch';
-global['fetch'] = fetch;
 const config = require('./src/config.json');
 const jsBase64 = require('js-base64').Base64;
 import ShipCloudApi from './src/init/main';

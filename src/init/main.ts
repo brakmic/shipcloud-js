@@ -1,3 +1,5 @@
+require('es6-promise').polyfill();
+require('isomorphic-fetch');
 import * as Api from '../api';
 import * as _ from 'lodash';
 
