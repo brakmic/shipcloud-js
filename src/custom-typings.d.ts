@@ -8,9 +8,6 @@ declare var ENV: string;
 declare var HMR: boolean;
 declare var System: SystemJS;
 declare var jquery: JQueryStatic;
-declare var fetch: any;
-declare var Request: any;
-declare var Headers: any;
 
 interface SystemJS {
   import: (path?: string) => Promise<any>;
@@ -102,7 +99,14 @@ interface Thenable<T> {
 interface FetchOptions {
 	method: string;
 	headers: any;
-	body: any;
+	body?: any;
+  mode?: string;
+  credentials?:  any;
+  cache?: string;
+  redirect?: string;
+  referrer?: string;
+  referrerPolicy?: string;
+  integrity?: string;
 }
 
 declare enum ResponseType {
@@ -111,6 +115,11 @@ declare enum ResponseType {
 	Default,
 	Error,
 	Opaque
+}
+
+declare class Request {
+  constructor(url: string);
+
 }
 
 interface Headers {
@@ -142,6 +151,7 @@ interface Response extends Body {
 	headers: Headers;
 	clone(): Response;
 }
+declare function fetch(input: Request, init?: FetchOptions): Promise<Response>;
 
 interface Window {
 	fetch(url: string): Promise<Response>;
