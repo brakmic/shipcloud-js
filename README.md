@@ -129,7 +129,7 @@ npm run start:hmr
 
 #### Console Client
 
-This binding can be used in any JavaScript environment as it contains a complete WebPack build setup that generates a bundle in the **dist** directory. But it also can be used directly in Node by calling 
+To test the binding in Node type:
 
 ```
 npm run start:client
@@ -137,7 +137,7 @@ npm run start:client
 
 #### Browser Client 
 
-This project contains a simple **index.html** located in **dist** that'll load the API JS-bundle. To run this web page you have to start the local server first:
+To run the **index.html** from **dist** type:
 
 ```
 npm run server:prod
