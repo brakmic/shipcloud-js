@@ -2,7 +2,7 @@ import { Address } from '../address';
 
 export interface TrackerResponse {
     id: string;
-    tracking_code: string;
+    carrier_tracking_no: string;
     status: string;
     created_at: string;
     to: Address;
