@@ -9,9 +9,6 @@ const doFetch = (url: string, headers: any = {}): Promise<any> => {
             headers: headers
         })
         .then(response => {
-            if (response.status >= 400) {
-                throw new Error('Bad response from server');
-            }
             return response.json();
         });
 };
@@ -28,9 +25,6 @@ const doPost = function <T>(url: string, data: T, headers: any = {}): Promise<an
         headers: allHeaders
     };
     return fetch(url, request).then(response => {
-        if (response.status >= 400) {
-            throw new Error('Bad response from server');
-        }
         return response.json();
     });
 };
@@ -47,14 +41,11 @@ const doPut = function <T>(url: string, data: T, headers: any = {}): Promise<any
         headers: allHeaders
     };
     return fetch(url, request).then(response => {
-        if (response.status >= 400) {
-            throw new Error('Bad response from server');
-        }
         return response.json();
     });
 };
 
-const doDelete = function <T>(url: string, data: T, headers: any = {}): Promise<any> {
+const doDelete = function <T>(url: string, headers: any = {}): Promise<any> {
     const allHeaders = _.assign({
                                    'Content-Type': 'application/json;charset=utf-8'
                                 }, headers);
@@ -65,9 +56,6 @@ const doDelete = function <T>(url: string, data: T, headers: any = {}): Promise<
         headers: allHeaders
     };
     return fetch(url, request).then((response: Response) => {
-        if (response.status >= 400) {
-            throw new Error('Bad response from server');
-        }
         return response.text();
     });
 };
