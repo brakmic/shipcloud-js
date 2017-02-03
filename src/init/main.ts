@@ -22,6 +22,15 @@ class ShipCloudApi {
     public createShipment(shipment: Api.Types.Shipment): Promise<Api.Types.ShipmentResponse> {
         return Api.Calls.Shipments.create(this.authHeader, shipment);
     }
+    public readShipment(id: string): Promise<Api.Types.ShipmentResponse> {
+        return Api.Calls.Shipments.read(this.authHeader, id);
+    }
+    public readAllShipments(): Promise<Api.Types.ShipmentQuoteResponse[]> {
+        return Api.Calls.Shipments.readAll(this.authHeader);
+    }
+    public updateShipment(shipment: Api.Types.Shipment, id: string): Promise<Api.Types.ShipmentResponse> {
+        return Api.Calls.Shipments.update(this.authHeader, shipment, id);
+    }
     public removeShipment(id: string): Promise<any> {
         return Api.Calls.Shipments.remove(this.authHeader, id);
     }

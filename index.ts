@@ -66,9 +66,9 @@ const composeShipment = (): Shipment => {
             last_name: 'Mustermann',
             street: 'Beispielstrasse',
             street_no: '42',
-            city: 'Hamburg',
-            zip_code: '22100',
-            country: 'DE'
+            city: 'Rum',
+            zip_code: '6063',
+            country: 'AT'
         },
         package: {
             weight: 1.5,
@@ -100,7 +100,7 @@ class Client {
         // createAddress(composeDummyAddress()).then(res => {
         //     console.log(res);
         // });
-        listKnownAddresses().then(res => console.log);
+        // listKnownAddresses().then(res => console.log);
         // createShipment(composeShipment()).then(res => {
         //     console.log(res);
         // });
