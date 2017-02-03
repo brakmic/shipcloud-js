@@ -11,6 +11,7 @@ const doFetch = (url: string, headers: any = {}): Promise<any> => {
     const allHeaders = _.assign(defaultHeaders, headers);
     return fetch(url, {
             method: 'GET',
+            mode: 'cors',
             headers: allHeaders
         })
         .then(response => {
