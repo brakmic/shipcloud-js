@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="">
+<head>
+  <title><%= htmlWebpackPlugin.options.title %></title>
+
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="<%= htmlWebpackPlugin.options.title %>">
+  <meta name="msapplication-tap-highlight" content="no" />
+
+  <% if (webpackConfig.htmlElements.headTags) { %>
+  <!-- Configured Head Tags  -->
+  <%= webpackConfig.htmlElements.headTags %>
+  <% } %>
+
+  <!-- base url -->
+  <base href="<%= htmlWebpackPlugin.options.metadata.baseUrl %>">
+
+</head>
+
+<body>
+  <% if (htmlWebpackPlugin.options.metadata.isDevServer && htmlWebpackPlugin.options.metadata.HMR !== true) { %>
+  <!-- Webpack Dev Server reload -->
+  <script src="/webpack-dev-server.js"></script>
+  <% } %>
+<div class="container container-fluid" style="padding-top: 1em;">
+    <div class="row">
+        <div class="col col-lg-10">
+            <div class="panel panel-info">
+                <div class="panel-heading">Welcome to <strong>ShipCloud API Bindings</strong> for JavaScript</div>
+                <div class="panel-body">
+                     Open your browser console and initialize the API client with: <br/>
+                     <div class="well well-sm">
+                        <div class="label label-success">
+                        var api = new ShipCloudApi('YOUR_API_KEY');
+                        </div>
+                     </div>
+                     <div class="well well-lg">
+                        You'll likely run into CORS exceptions when trying to communicate with <strong>api.shipcloud.io</strong> directly.
+                        This is due to certain HTTP restrictions that constrain <a href="https://www.html5rocks.com/en/tutorials/cors/">cross-domain communication</a>.<br/> 
+                        One possible solution would be a proxy server based on <a href="https://hapijs.com/">HapiJS</a> or <a href="http://expressjs.com/">Express</a> to forward local queries. 
+                     </div>
+                </div>
+                <div class="panel-footer">
+                    Developed with <span class="glyphicon glyphicon-heart" aria-hidden="true"></span> by <a href="http://www.advarics.net">advarics GmbH</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

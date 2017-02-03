@@ -1,16 +1,14 @@
 const config = require('./src/config.json');
 const jsBase64 = require('js-base64').Base64;
 import ShipCloudApi from './src/init/main';
-import { Address, AddressResponse,
-         Shipment, ShipmentResponse,
-         Package } from './src/api/v1/types';
+import { Types, IShipCloud } from './src/api/v1';
 import * as _ from 'lodash';
 
-let api: ShipCloudApi;
+let api: IShipCloud;
 
 const listKnownAddresses = (): Promise<any> => {
     console.log(`Querying all known addresses\r\n`);
-    return api.readAllAddresses().then((addresses: AddressResponse[]) => {
+    return api.readAllAddresses().then((addresses: Types.AddressResponse[]) => {
         console.log(`Response received containing ${addresses.length} valid addresses.\r\n`);
         _.each(addresses, address => {
             console.log(address);
@@ -18,17 +16,17 @@ const listKnownAddresses = (): Promise<any> => {
     });
 };
 
-const getSingleAddress = (id: string): Promise<AddressResponse> => {
+const getSingleAddress = (id: string): Promise<Types.AddressResponse> => {
     console.log(`Querying addreess with id ${id}\r\n`);
     return api.readAddress(id);
 };
 
-const createAddress = (address: Address): Promise<AddressResponse> => {
+const createAddress = (address: Types.Address): Promise<Types.AddressResponse> => {
     console.log(`Creating a new address\r\n`);
     return api.createAddress(address);
 };
 
-const createShipment = (shipment: Shipment): Promise<ShipmentResponse> => {
+const createShipment = (shipment: Types.Shipment): Promise<Types.ShipmentResponse> => {
     console.log(`Creating new Shipment\r\n`);
     return api.createShipment(shipment);
 };
@@ -38,8 +36,8 @@ const removeShipment = (id: string): Promise<any> => {
     return api.removeShipment(id);
 };
 
-const composeDummyAddress = (): Address => {
-    return <Address>{
+const composeDummyAddress = (): Types.Address => {
+    return <Types.Address>{
        'company': 'ACME Company',
        'first_name': 'Bugs',
        'last_name': 'Bunny',
@@ -54,8 +52,8 @@ const composeDummyAddress = (): Address => {
     };
 };
 
-const composeShipment = (): Shipment => {
-    const shipment = <Shipment>{
+const composeShipment = (): Types.Shipment => {
+    const shipment = <Types.Shipment>{
         from: {
             id: '1b9f23ab-6332-4c6c-beed-c1295e9dd749'
         },

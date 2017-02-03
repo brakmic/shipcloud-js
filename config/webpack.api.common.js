@@ -13,6 +13,9 @@ const NormalModuleReplacementPlugin = require('webpack/lib/NormalModuleReplaceme
 const ProvidePlugin = require('webpack/lib/ProvidePlugin');
 const CommonsChunkPlugin = require('webpack/lib/optimize/CommonsChunkPlugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
+const HtmlElementsPlugin = require('./html-elements-plugin');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const ScriptExtHtmlWebpackPlugin = require('script-ext-html-webpack-plugin');
 const CheckerPlugin = require('awesome-typescript-loader').CheckerPlugin;
 const LoaderOptionsPlugin = require('webpack/lib/LoaderOptionsPlugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
@@ -102,7 +105,7 @@ module.exports = function(options) {
             {
               loader: 'awesome-typescript-loader',
               options: {
-                configFileName: 'tsconfig.webpack.json'
+                configFileName: 'tsconfig.json'
               }
             }
           ],
@@ -161,6 +164,88 @@ module.exports = function(options) {
         chunks: ['main'],
         minChunks: module => /node_modules\//.test(module.resource)
     }),
+
+    /*
+     * Plugin: CopyWebpackPlugin
+     * Description: Copy files and directories in webpack.
+     *
+     * Copies project static assets.
+     *
+     * See: https://www.npmjs.com/package/copy-webpack-plugin
+     */
+    new CopyWebpackPlugin([
+        {
+          from: 'src/config.json'
+        },
+        {
+          from: 'src/vendor'
+        },
+        {
+          from: './favicon.ico'
+        },
+        ], 
+        {
+          ignore: [
+            'humans.txt',
+            'robots.txt'
+        ]
+      }),
+
+    /*
+     * Plugin: HtmlWebpackPlugin
+     * Description: Simplifies creation of HTML files to serve your webpack bundles.
+     * This is especially useful for webpack bundles that include a hash in the filename
+     * which changes every compilation.
+     *
+     * See: https://github.com/ampedandwired/html-webpack-plugin
+     */
+    new HtmlWebpackPlugin({
+      template: 'src/index.html',
+      title: METADATA.title,
+      isDevServer: METADATA.isDevServer,
+      favicon: 'favicon.ico',
+      chunksSortMode: 'dependency',
+      metadata: METADATA,
+      inject: 'head'
+    }),
+
+    /*
+    * Plugin: ScriptExtHtmlWebpackPlugin
+    * Description: Enhances html-webpack-plugin functionality
+    * with different deployment options for your scripts including:
+    *
+    * See: https://github.com/numical/script-ext-html-webpack-plugin
+    */
+    new ScriptExtHtmlWebpackPlugin({
+      defaultAttribute: 'defer'
+    }),
+
+    /*
+     * Plugin: HtmlHeadConfigPlugin
+     * Description: Generate html tags based on javascript maps.
+     *
+     * If a publicPath is set in the webpack output configuration, it will be automatically added to
+     * href attributes, you can disable that by adding a "=href": false property.
+     * You can also enable it to other attribute by settings "=attName": true.
+     *
+     * The configuration supplied is map between a location (key) and an element definition object (value)
+     * The location (key) is then exported to the template under then htmlElements property in webpack configuration.
+     *
+     * Example:
+     *  Adding this plugin configuration
+     *  new HtmlElementsPlugin({
+     *    headTags: { ... }
+     *  })
+     *
+     *  Means we can use it in the template like this:
+     *  <%= webpackConfig.htmlElements.headTags %>
+     *
+     * Dependencies: HtmlWebpackPlugin
+     */
+    new HtmlElementsPlugin({
+      headTags: require('./head-config.common')
+    }),
+
   ],
 
   /*

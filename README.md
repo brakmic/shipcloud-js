@@ -76,6 +76,14 @@ Api Auth
 
 Api-Auth class contains some helper methods for auth-key management. 
 
+#### Public directory 
+
+```
+ShipCloud
+```
+
+This directory contains the public ShipCloud interface. Clients should use it for type-safe API access.
+
 ### REST & JSON 
 
 All API calls go via the [RequestHelper](https://github.com/brakmic/shipcloud-js/blob/master/src/api/base/request-helper.ts) class. This class utilizes [node-fetch](https://www.npmjs.com/package/node-fetch) and [implements](https://github.com/brakmic/shipcloud-js/blob/master/src/api/base/request-helper.ts#L76) the GET, POST, PUT and DELETE requests.
@@ -112,7 +120,25 @@ npm run start:hmr
 
 ### Usage 
 
-This binding can be used in any JavaScript environment as it contains a complete WebPack build setup that generates a bundle in the **dist** directory. But it also can be used directly in Node by calling `npm run start:client`. In this case a special node instance called **ts-node** will load **index.ts** from the project root and instantiate a small client script. This script initializes the API binding located in **src** and some of their API calls to query data from ShipCloud. 
+#### Console Client
+
+This binding can be used in any JavaScript environment as it contains a complete WebPack build setup that generates a bundle in the **dist** directory. But it also can be used directly in Node by calling 
+
+```
+npm run start:client
+``` 
+
+#### Browser Client 
+
+This project contains a simple **index.html** located in **dist** that'll load the API JS-bundle. To run this web page you have to start the local server first:
+
+```
+npm run server:prod
+```
+
+Then open [http://localhost:8080](http://localhost:8080) in your browser and follow the instructions on the page. 
+
+In this case a special node instance called **ts-node** will load **index.ts** from the project root and instantiate a small client script. This script initializes the API binding located in **src** and some of their API calls to query data from ShipCloud. 
 
 Here's an example output:
 
