@@ -2,11 +2,12 @@ import * as _ from 'lodash';
 declare var fetch: any;
 declare var Request: any;
 declare var Headers: any;
+let defaultHeaders = {
+    'Content-Type': 'application/json;charset=utf-8'
+};
 // use fetch for all API calls
 const doFetch = (url: string, headers: any = {}): Promise<any> => {
-    const allHeaders = _.assign({
-                                   'Content-Type': 'application/json;charset=utf-8'
-                                }, headers);
+    const allHeaders = _.assign(defaultHeaders, headers);
     return fetch(url, {
             method: 'GET',
             headers: allHeaders
@@ -17,9 +18,7 @@ const doFetch = (url: string, headers: any = {}): Promise<any> => {
 };
 
 const doPost = function <T>(url: string, data: T, headers: any = {}): Promise<any> {
-    const allHeaders = _.assign({
-                                   'Content-Type': 'application/json;charset=utf-8'
-                                }, headers);
+    const allHeaders = _.assign(defaultHeaders, headers);
     const request = {
         method: 'POST',
         mode: 'cors',
@@ -33,9 +32,7 @@ const doPost = function <T>(url: string, data: T, headers: any = {}): Promise<an
 };
 
 const doPut = function <T>(url: string, data: T, headers: any = {}): Promise<any> {
-    const allHeaders = _.assign({
-                                   'Content-Type': 'application/json;charset=utf-8'
-                                }, headers);
+    const allHeaders = _.assign(defaultHeaders, headers);
     const request = {
         method: 'PUT',
         mode: 'cors',
@@ -49,9 +46,7 @@ const doPut = function <T>(url: string, data: T, headers: any = {}): Promise<any
 };
 
 const doDelete = function <T>(url: string, headers: any = {}): Promise<any> {
-    const allHeaders = _.assign({
-                                   'Content-Type': 'application/json;charset=utf-8'
-                                }, headers);
+    const allHeaders = _.assign(defaultHeaders, headers);
     const request = {
         method: 'DELETE',
         mode: 'cors',
