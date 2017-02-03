@@ -8,14 +8,22 @@ class ShipCloudApi {
        this.authHeader = {'Authorization': `Basic ${this.apiKey}`};
        console.log('ShipCloud API initialized');
     }
-    public readAllAddresses(): Promise<Api.Types.AddressResponse[]> {
-        return Api.Calls.Addresses.readAll(this.authHeader);
+    // Adresses
+    public createAddress(address: Api.Types.Address): Promise<Api.Types.AddressResponse> {
+        return Api.Calls.Addresses.create(this.authHeader, address);
     }
     public readAddress(id: string): Promise<Api.Types.AddressResponse> {
         return Api.Calls.Addresses.read(this.authHeader, id);
     }
-    public createAddress(address: Api.Types.Address): Promise<Api.Types.AddressResponse> {
-        return Api.Calls.Addresses.create(this.authHeader, address);
+    public readAllAddresses(): Promise<Api.Types.AddressResponse[]> {
+        return Api.Calls.Addresses.readAll(this.authHeader);
+    }
+    // Shipments
+    public createShipment(shipment: Api.Types.Shipment): Promise<Api.Types.ShipmentResponse> {
+        return Api.Calls.Shipments.create(this.authHeader, shipment);
+    }
+    public removeShipment(id: string): Promise<any> {
+        return Api.Calls.Shipments.remove(this.authHeader, id);
     }
 }
 

@@ -2,7 +2,9 @@ import * as fetch from 'node-fetch';
 global['fetch'] = fetch;
 const config = require('./src/config.json');
 import ShipCloudApi from './src/init/main';
-import { Address, AddressResponse } from './src/api/v1/types';
+import { Address, AddressResponse,
+         Shipment, ShipmentResponse,
+         Package } from './src/api/v1/types';
 import * as _ from 'lodash';
 
 let api: ShipCloudApi;
@@ -27,6 +29,16 @@ const createAddress = (address: Address): Promise<AddressResponse> => {
     return api.createAddress(address);
 };
 
+const createShipment = (shipment: Shipment): Promise<ShipmentResponse> => {
+    console.log(`Creating new Shipment\r\n`);
+    return api.createShipment(shipment);
+};
+
+const removeShipment = (id: string): Promise<any> => {
+    console.log(`Removing Shipment with id ${id}\r\n`);
+    return api.removeShipment(id);
+};
+
 const composeDummyAddress = (): Address => {
     return <Address>{
        'company': 'ACME Company',
@@ -43,6 +55,40 @@ const composeDummyAddress = (): Address => {
     };
 };
 
+const composeShipment = (): Shipment => {
+    const shipment = <Shipment>{
+        from: {
+            id: '1b9f23ab-6332-4c6c-beed-c1295e9dd749'
+        },
+        to: {
+            company: 'Receiver Inc.',
+            first_name: 'Max',
+            last_name: 'Mustermann',
+            street: 'Beispielstrasse',
+            street_no: '42',
+            city: 'Hamburg',
+            zip_code: '22100',
+            country: 'DE'
+        },
+        package: {
+            weight: 1.5,
+            length: 20,
+            width: 20,
+            height: 20,
+            declared_value: {
+                amount: 555.45,
+                currency: 'EUR'
+            }
+        },
+        carrier: 'dhl',
+        service: 'standard',
+        reference_number: 'ref123456',
+        notification_email: 'person@example.com',
+        create_shipping_label: true
+    };
+    return shipment;
+};
+
 class Client {
     constructor() {
         this.setup();
@@ -51,10 +97,15 @@ class Client {
         // getSingleAddress('ADDRESS_ID').then(res => {
         //     console.log(res);
         // });
-        createAddress(composeDummyAddress()).then(res => {
-            console.log(res);
-        });
+        // createAddress(composeDummyAddress()).then(res => {
+        //     console.log(res);
+        // });
         listKnownAddresses().then(res => console.log);
+        // createShipment(composeShipment()).then(res => {
+        //     console.log(res);
+        // });
+        // removeShipment('SHIPMENT_ID');
+
     }
     private setup() {
         api = new ShipCloudApi(config.sandboxApiKey);
