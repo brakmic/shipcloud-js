@@ -13,7 +13,7 @@ const read = (authHeader: any, id: string): Promise<ShipmentResponse> => {
     return RequestHelper.get(`${shipmentsUrl}/${id}`, authHeader);
 };
 
-const readAll = (authHeader: any): Promise<Shipment[]> => {
+const readAll = (authHeader: any): Promise<ShipmentResponse[]> => {
     return RequestHelper.get(shipmentsUrl, authHeader);;
 };
 
