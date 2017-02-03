@@ -3,7 +3,8 @@ declare var fetch: any;
 declare var Request: any;
 declare var Headers: any;
 let defaultHeaders = {
-    'Content-Type': 'application/json;charset=utf-8'
+    'Content-Type': 'application/json;charset=utf-8',
+    'Cache-Control': 'no-cache'
 };
 // use fetch for all API calls
 const doFetch = (url: string, headers: any = {}): Promise<any> => {
