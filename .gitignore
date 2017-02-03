@@ -42,6 +42,3 @@ dist/
 # ignore vs code settings
 
 .vscode/
-
-# prevent accidental check-ins of API keys
-src/config.json
