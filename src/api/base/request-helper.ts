@@ -1,7 +1,4 @@
 import * as _ from 'lodash';
-declare var fetch: any;
-declare var Request: any;
-declare var Headers: any;
 let defaultHeaders = {
     'Content-Type': 'application/json;charset=utf-8',
     'Cache-Control': 'no-cache'

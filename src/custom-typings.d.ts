@@ -8,6 +8,9 @@ declare var ENV: string;
 declare var HMR: boolean;
 declare var System: SystemJS;
 declare var jquery: JQueryStatic;
+declare var fetch: any;
+declare var Request: any;
+declare var Headers: any;
 
 interface SystemJS {
   import: (path?: string) => Promise<any>;
