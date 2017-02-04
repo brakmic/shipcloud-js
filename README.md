@@ -143,13 +143,15 @@ Here's an example output:
 
 #### Browser Client 
 
-To run the **index.html** from **dist** type:
+Type:
 
 ```
-npm run server:prod
+npm run build:client
 ```
 
-Then open [http://localhost:8080](http://localhost:8080) in your browser and follow the instructions on the page. 
+The generated build will be located in **dist/client**.
+
+Copy this directory to your web server and open **index.html**. 
 
 **Notice**: It depends on *your current setup* what and if any data will be sent back from ShipCloud. Also, don't forget to check your API key in **src/config.json** if you experience any problems. 
 

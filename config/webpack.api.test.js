@@ -111,7 +111,7 @@ module.exports = function(options) {
       options: {
         context: __dirname,
         output: {
-          path: helpers.root('dist')
+          path: helpers.root('dist/api')
         },
         /**
          * Static analysis linter for TypeScript advanced options configuration

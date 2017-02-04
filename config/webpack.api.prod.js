@@ -53,7 +53,7 @@ return webpackMerge(commonConfig({ env: ENV }), {
      *
      * See: http://webpack.github.io/docs/configuration.html#output-path
      */
-    path: helpers.root('dist'),
+    path: helpers.root('dist/api'),
 
     // publicPath: '/',
 
@@ -100,7 +100,7 @@ return webpackMerge(commonConfig({ env: ENV }), {
       options: {
         context: __dirname,
         output: {
-          path: helpers.root('dist')
+          path: helpers.root('dist/api')
         },
         /**
          * Static analysis linter for TypeScript advanced options configuration

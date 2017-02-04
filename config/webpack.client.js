@@ -23,6 +23,7 @@ const DashboardPlugin = require('webpack-dashboard/plugin');
  * Webpack Constants
  */
 const HMR = helpers.hasProcessFlag('hot');
+const ENV = process.env.ENV = process.env.NODE_ENV = 'development';
 const METADATA = {
   port: 3000,
   host: 'localhost',
@@ -37,8 +38,7 @@ const METADATA = {
  *
  * See: http://webpack.github.io/docs/configuration.html#cli
  */
-module.exports = function(options) {
- var isProd = options.env === 'production';
+module.exports = function() {
  return {
 
    /*
@@ -48,7 +48,51 @@ module.exports = function(options) {
    * See: http://webpack.github.io/docs/configuration.html#entry
    */
   entry: {
-    'api': './src/init/main.ts'
+    'api': './src/init/boot.ts'
+  },
+
+  /**
+   * Options affecting the output of the compilation.
+   *
+   * See: http://webpack.github.io/docs/configuration.html#output
+   */
+  output: {
+
+    /**
+     * The output directory as absolute path (required).
+     *
+     * See: http://webpack.github.io/docs/configuration.html#output-path
+     */
+    path: helpers.root('dist/client'),
+
+    /**
+     * Specifies the name of each output file on disk.
+     * IMPORTANT: You must not specify an absolute path here!
+     *
+     * See: http://webpack.github.io/docs/configuration.html#output-filename
+     */
+    filename: '[name].bundle.js',
+
+    /**
+     * The filename of the SourceMaps for the JavaScript files.
+     * They are inside the output.path directory.
+     *
+     * See: http://webpack.github.io/docs/configuration.html#output-sourcemapfilename
+     */
+    sourceMapFilename: '[name].map',
+
+    /** The filename of non-entry chunks as relative path
+     * inside the output.path directory.
+     *
+     * See: http://webpack.github.io/docs/configuration.html#output-chunkfilename
+     */
+    chunkFilename: '[id].chunk.js',
+
+    library: 'ac_[name]',
+    libraryTarget: 'var',
+
+    pathinfo: true
+
   },
 
   /*
@@ -137,12 +181,111 @@ module.exports = function(options) {
      */
     new CheckerPlugin(),
 
+    /**
+     * Plugin LoaderOptionsPlugin (experimental)
+     *
+     * See: https://gist.github.com/sokra/27b24881210b56bbaff7
+     */
+    new LoaderOptionsPlugin({
+      options: {
+          METADATA: METADATA,
+          context: __dirname,
+          output: {
+            path: helpers.root('dist/client'),
+          },
+          alias: {
+            // 'jquery': helpers.root('src/vendor/jquery/jquery-2.2.3.min'),
+          }
+      }
+    }),
+
     new DashboardPlugin(),
     // This enables tree shaking of the vendor modules
     new CommonsChunkPlugin({
         name: 'vendor',
         chunks: ['main'],
         minChunks: module => /node_modules\//.test(module.resource)
+    }),
+
+    /*
+     * Plugin: CopyWebpackPlugin
+     * Description: Copy files and directories in webpack.
+     *
+     * Copies project static assets.
+     *
+     * See: https://www.npmjs.com/package/copy-webpack-plugin
+     */
+    new CopyWebpackPlugin([
+        {
+          from: 'src/config.json'
+        },
+        {
+          from: 'src/vendor'
+        },
+        {
+          from: './favicon.ico'
+        },
+        ], 
+        {
+          ignore: [
+            'humans.txt',
+            'robots.txt'
+        ]
+      }),
+
+    /*
+     * Plugin: HtmlWebpackPlugin
+     * Description: Simplifies creation of HTML files to serve your webpack bundles.
+     * This is especially useful for webpack bundles that include a hash in the filename
+     * which changes every compilation.
+     *
+     * See: https://github.com/ampedandwired/html-webpack-plugin
+     */
+    new HtmlWebpackPlugin({
+      template: 'src/index.html',
+      title: METADATA.title,
+      isDevServer: METADATA.isDevServer,
+      favicon: 'favicon.ico',
+      chunksSortMode: 'dependency',
+      metadata: METADATA,
+      inject: 'head'
+    }),
+
+    /*
+    * Plugin: ScriptExtHtmlWebpackPlugin
+    * Description: Enhances html-webpack-plugin functionality
+    * with different deployment options for your scripts including:
+    *
+    * See: https://github.com/numical/script-ext-html-webpack-plugin
+    */
+    new ScriptExtHtmlWebpackPlugin({
+      defaultAttribute: 'defer'
+    }),
+
+    /*
+     * Plugin: HtmlHeadConfigPlugin
+     * Description: Generate html tags based on javascript maps.
+     *
+     * If a publicPath is set in the webpack output configuration, it will be automatically added to
+     * href attributes, you can disable that by adding a "=href": false property.
+     * You can also enable it to other attribute by settings "=attName": true.
+     *
+     * The configuration supplied is map between a location (key) and an element definition object (value)
+     * The location (key) is then exported to the template under then htmlElements property in webpack configuration.
+     *
+     * Example:
+     *  Adding this plugin configuration
+     *  new HtmlElementsPlugin({
+     *    headTags: { ... }
+     *  })
+     *
+     *  Means we can use it in the template like this:
+     *  <%= webpackConfig.htmlElements.headTags %>
+     *
+     * Dependencies: HtmlWebpackPlugin
+     */
+    new HtmlElementsPlugin({
+      headTags: require('./head-config.common')
     }),
 
   ],
