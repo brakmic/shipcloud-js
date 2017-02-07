@@ -4,6 +4,8 @@ This project provides a complete mapping of [ShipCloud](https://www.shipcloud.io
 
 **This projects is still in development. Some of the API Calls aren't implemented yet.**
 
+For a C++ version visit [this](https://github.com/brakmic/shipcloud-cpp) repo.
+
 ### Structure
 
 We use these fine open source packages and languages:
