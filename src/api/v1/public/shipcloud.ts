@@ -1,7 +1,8 @@
 import { Address } from '../types/address';
 import { Shipment } from '../types/shipment';
+import { Rate } from '../types/rate';
 import { AddressResponse, ShipmentResponse,
-         CarrierResponse } from '../types/responses';
+         CarrierResponse, RateResponse } from '../types/responses';
 
 export interface IShipCloud {
     // Adresses
@@ -10,6 +11,8 @@ export interface IShipCloud {
     readAllAddresses: () => Promise<AddressResponse[]>;
     // Carriers
     readAllCarriers: () => Promise<CarrierResponse[]>;
+    // Rates [deprecated] => use "shipment quotes" instead
+    getRateFor: (rate: Rate) => Promise<RateResponse>;
     // // Shipments
     createShipment: (shipment: Shipment) => Promise<ShipmentResponse>;
     readShipment: (id: string) => Promise<ShipmentResponse>;

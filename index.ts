@@ -28,6 +28,13 @@ const listAllCarriers = (): Promise<any> => {
     });
 };
 
+const getRateFor = (rate: Types.Rate): Promise<any> => {
+    console.log(`Querying rate for: ${JSON.stringify(rate, undefined, 2)}`);
+    return api.getRateFor(rate).then(response => {
+        console.log(response);
+    });
+};
+
 const getSingleAddress = (id: string): Promise<Types.AddressResponse> => {
     console.log(`Querying addreess with id ${id}\r\n`);
     return api.readAddress(id);
@@ -98,6 +105,16 @@ const composeShipment = (): Types.Shipment => {
     return shipment;
 };
 
+const composeRate = (): Types.Rate => {
+    return <Types.Rate>{
+        carrier: 'dhl',
+        weight: 1.5,
+        length: 20,
+        width: 20,
+        height: 20
+    };
+};
+
 class Client {
     constructor() {
         this.setup();
@@ -110,7 +127,8 @@ class Client {
         //     console.log(res);
         // });
         // listKnownAddresses().then(res => console.log);
-        listAllCarriers();
+        // listAllCarriers();
+        getRateFor(composeRate());
         // createShipment(composeShipment()).then(res => {
         //     console.log(res);
         // });
