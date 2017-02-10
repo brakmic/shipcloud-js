@@ -8,7 +8,6 @@ const readAll = (authHeader: any): Promise<CarrierResponse[]> => {
     return RequestHelper.get(addressesUrl, authHeader);;
 };
 
-
 export const Carriers = {
     readAll
 };
