@@ -38,7 +38,7 @@ class ShipCloudApi implements Api.IShipCloud {
     public readShipment(id: string): Promise<Api.Types.ShipmentResponse> {
         return Api.Calls.Shipments.read(this.authHeader, id);
     }
-    public readAllShipments(): Promise<Api.Types.ShipmentQuoteResponse[]> {
+    public readAllShipments(): Promise<Api.Types.ShipmentResponse[]> {
         return Api.Calls.Shipments.readAll(this.authHeader);
     }
     public updateShipment(shipment: Api.Types.Shipment, id: string): Promise<Api.Types.ShipmentResponse> {
