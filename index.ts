@@ -1,12 +1,16 @@
 const config = require('./src/config.json');
 const jsBase64 = require('js-base64').Base64;
-import ShipCloudApi from './src/init/main';
-import { Types, IShipCloud } from './src/api/v1';
 import * as _ from 'lodash';
+import { Api } from './src/api';
+import ShipCloudApi from './src/init/main';
 
-let api: IShipCloud;
+let api: Api.IShipCloud;
 
-const display = (objects: any): void => {
+const display = (obj: any): void => {
+    console.log(obj);
+};
+
+const displayCollection = (objects: any): void => {
     _.each(objects, obj => {
         console.log(obj);
     });
@@ -14,50 +18,55 @@ const display = (objects: any): void => {
 
 const listKnownAddresses = (): Promise<any> => {
     console.log(`Querying all known addresses\r\n`);
-    return api.readAllAddresses().then((addresses: Types.AddressResponse[]) => {
+    return api.readAllAddresses().then((addresses: Api.Types.AddressResponse[]) => {
         console.log(`Response received containing ${addresses.length} valid addresses.\r\n`);
-        display(addresses);
+        displayCollection(addresses);
     });
 };
 
 const listAllCarriers = (): Promise<any> => {
     console.log(`Querying all carriers\r\n`);
-    return api.readAllCarriers().then((carriers: Types.CarrierResponse[]) => {
+    return api.readAllCarriers().then((carriers: Api.Types.CarrierResponse[]) => {
         console.log(`Response received containing ${carriers.length} valid carriers.\r\n`);
-        display(carriers);
+        displayCollection(carriers);
     });
 };
 
-const getRateFor = (rate: Types.Rate): Promise<any> => {
+const getRateFor = (rate: Api.Types.Rate): Promise<any> => {
     console.log(`Querying rate for: ${JSON.stringify(rate, undefined, 2)}`);
     return api.getRateFor(rate).then(response => {
         console.log(response);
     });
 };
 
-const getSingleAddress = (id: string): Promise<Types.AddressResponse> => {
+const getSingleAddress = (id: string): Promise<Api.Types.AddressResponse> => {
     console.log(`Querying addreess with id ${id}\r\n`);
     return api.readAddress(id);
 };
 
-const createAddress = (address: Types.Address): Promise<Types.AddressResponse> => {
+const createAddress = (address: Api.Types.Address): Promise<Api.Types.AddressResponse> => {
     console.log(`Creating a new address\r\n`);
     return api.createAddress(address);
 };
 
-const createPickupRequest = (pickup: Types.Pickup): Promise<Types.PickupResponse> => {
+const createPickupRequest = (pickup: Api.Types.Pickup): Promise<Api.Types.PickupResponse> => {
     console.log(`Creating a new Pickup Request\r\n`);
     return api.createPickupRequest(pickup);
 };
 
-const createShipment = (shipment: Types.Shipment): Promise<Types.ShipmentResponse> => {
+const createShipment = (shipment: Api.Types.Shipment): Promise<Api.Types.ShipmentResponse> => {
     console.log(`Creating new Shipment\r\n`);
     return api.createShipment(shipment);
 };
 
-const createShipmentQuote = (quote: Types.ShipmentQuote): Promise<Types.ShipmentQuoteResponse> => {
+const createShipmentQuote = (quote: Api.Types.ShipmentQuote): Promise<Api.Types.ShipmentQuoteResponse> => {
     console.log(`Creating a new ShipmentQuote\r\n`);
     return api.createShipmentQuote(quote);
+};
+
+const createWebHook = (hook: Api.Types.WebHook): Promise<Api.Types.WebHookResponse> => {
+    console.log(`Creating a new WebHook\r\n`);
+    return api.createWebHook(hook);
 };
 
 const removeShipment = (id: string): Promise<any> => {
@@ -65,8 +74,8 @@ const removeShipment = (id: string): Promise<any> => {
     return api.removeShipment(id);
 };
 
-const composeDummyAddress = (): Types.Address => {
-    return <Types.Address>{
+const composeDummyAddress = (): Api.Types.Address => {
+    return <Api.Types.Address>{
         'company': 'ACME Company',
         'first_name': 'Bugs',
         'last_name': 'Bunny',
@@ -81,8 +90,8 @@ const composeDummyAddress = (): Types.Address => {
     };
 };
 
-const composeShipment = (): Types.Shipment => {
-    const shipment = <Types.Shipment>{
+const composeShipment = (): Api.Types.Shipment => {
+    const shipment = <Api.Types.Shipment>{
         from: {
             id: '1b9f23ab-6332-4c6c-beed-c1295e9dd749'
         },
@@ -115,8 +124,8 @@ const composeShipment = (): Types.Shipment => {
     return shipment;
 };
 
-const composeShipmentQuote = (): Types.ShipmentQuote => {
-    return <Types.ShipmentQuote>{
+const composeShipmentQuote = (): Api.Types.ShipmentQuote => {
+    return <Api.Types.ShipmentQuote>{
         carrier: 'dhl',
         service: 'standard',
         to: {
@@ -142,8 +151,8 @@ const composeShipmentQuote = (): Types.ShipmentQuote => {
     };
 };
 
-const composePickup = (): Types.Pickup => {
-    return <Types.Pickup>{
+const composePickup = (): Api.Types.Pickup => {
+    return <Api.Types.Pickup>{
         carrier: 'dpd',
         pickup_time: {
             earliest: '2015-09-15T09:00:00+02:00',
@@ -163,8 +172,8 @@ const composePickup = (): Types.Pickup => {
     };
 };
 
-const composeRate = (): Types.Rate => {
-    return <Types.Rate>{
+const composeRate = (): Api.Types.Rate => {
+    return <Api.Types.Rate>{
         carrier: 'dhl',
         weight: 1.5,
         length: 20,
@@ -173,37 +182,36 @@ const composeRate = (): Types.Rate => {
     };
 };
 
+const composeWebHook = (): Api.Types.WebHook => {
+    return <Api.Types.WebHook>{
+        url: 'https://example.com/webhook',
+        event_types: ['shipment.tracking.delayed', 'shipment.tracking.delivered']
+    }
+};
+
 class Client {
     constructor() {
         this.setup();
     }
     public run() {
 
-        // getSingleAddress('ADDRESS_ID').then(res => {
-        //     console.log(res);
-        // });
+        // getSingleAddress('ADDRESS_ID').then(display);
 
-        // createAddress(composeDummyAddress()).then(res => {
-        //     console.log(res);
-        // });
+        // createAddress(composeDummyAddress()).then(display);
 
-        // listKnownAddresses().then(res => console.log);
+        // listKnownAddresses().then(displayCollection);
 
         // listAllCarriers();
 
-        // createPickupRequest(composePickup()).then(res => {
-        //     console.log(res);
-        // });
+        // createPickupRequest(composePickup()).then(display);
 
         // getRateFor(composeRate());
 
-        // createShipment(composeShipment()).then(res => {
-        //     console.log(res);
-        // });
+        // createShipment(composeShipment()).then(display);
 
-        // createShipmentQuote(composeShipmentQuote()).then(res => {
-        //    console.log(res);
-        // });
+        // createShipmentQuote(composeShipmentQuote()).then(display);
+
+        // createWebHook(composeWebHook()).then(display);
 
         // removeShipment('SHIPMENT_ID');
 

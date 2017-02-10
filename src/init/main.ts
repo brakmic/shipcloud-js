@@ -1,6 +1,6 @@
 require('es6-promise').polyfill();
 require('isomorphic-fetch');
-import * as Api from '../api';
+import { Api } from '../api';
 import * as _ from 'lodash';
 
 class ShipCloudApi implements Api.IShipCloud {
@@ -50,6 +50,19 @@ class ShipCloudApi implements Api.IShipCloud {
     // Shipment Quotes
     public createShipmentQuote(quote: Api.Types.ShipmentQuote): Promise<Api.Types.ShipmentQuoteResponse> {
         return Api.Calls.ShipmentQuotes.create(this.authHeader, quote);
+    }
+    // Webhooks
+    public readWebHook(id: string): Promise<Api.Types.WebHookResponse> {
+        return Api.Calls.WebHooks.read(this.authHeader, id);
+    }
+    public readAllWebHooks(): Promise<Api.Types.WebHookResponse[]> {
+        return Api.Calls.WebHooks.readAll(this.authHeader);
+    }
+    public createWebHook(hook: Api.Types.WebHook): Promise<Api.Types.WebHookResponse> {
+        return Api.Calls.WebHooks.create(this.authHeader, hook);
+    }
+    public removeWebHook(id: string): Promise<Api.Types.WebHookResponse> {
+        return Api.Calls.WebHooks.remove(this.authHeader, id);
     }
 }
 

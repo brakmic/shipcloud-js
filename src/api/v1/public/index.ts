@@ -1,1 +1,1 @@
-export * from './shipcloud';
+export { IShipCloud } from './shipcloud';

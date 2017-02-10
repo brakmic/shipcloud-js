@@ -3,9 +3,11 @@ import { Rate } from '../types/rate';
 import { Shipment } from '../types/shipment';
 import { ShipmentQuote } from '../types/shipment-quote';
 import { Pickup } from '../types/pickup';
+import { WebHook } from '../types/webhook';
 import { AddressResponse, ShipmentResponse,
          CarrierResponse, RateResponse,
-         ShipmentQuoteResponse, PickupResponse } from '../types/responses';
+         ShipmentQuoteResponse, PickupResponse,
+         WebHookResponse } from '../types/responses';
 
 export interface IShipCloud {
     // Adresses
@@ -26,4 +28,9 @@ export interface IShipCloud {
     removeShipment: (id: string) => Promise<any>;
     // ShipmentQuotes
     createShipmentQuote: (quote: ShipmentQuote) => Promise<ShipmentQuoteResponse>;
+    // Webhooks
+    createWebHook: (hook: WebHook) => Promise<WebHookResponse>;
+    readWebHook: (id: string) => Promise<WebHookResponse>;
+    readAllWebHooks: () => Promise<WebHookResponse[]>;
+    removeWebHook: (id: string) => Promise<WebHookResponse>;
 }

@@ -6,3 +6,4 @@ export * from './rate'; // deprecated! use shipment quotest instead!
 export * from './responses';
 export * from './shipment';
 export * from './shipment-quote';
+export * from './webhook';
