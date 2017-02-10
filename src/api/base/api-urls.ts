@@ -4,6 +4,7 @@ const API_URLS = {
     rates: { version: 'v1', server: 'api.shipcloud.io' },
     pickup_requests: { version: 'v1', server: 'api.shipcloud.io' },
     shipments: { version: 'v1', server: 'api.shipcloud.io' },
+    shipment_quotes: { version: 'v1', server: 'api.shipcloud.io' },
     trackers: { version: 'v1', server: 'api.shipcloud.io' },
     webhooks: { version: 'v1', server: 'api.shipcloud.io' }
 };

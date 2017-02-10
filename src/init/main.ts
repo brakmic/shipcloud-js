@@ -43,6 +43,10 @@ class ShipCloudApi implements Api.IShipCloud {
     public removeShipment(id: string): Promise<any> {
         return Api.Calls.Shipments.remove(this.authHeader, id);
     }
+    // Shipment Quotes
+    public createShipmentQuote(quote: Api.Types.ShipmentQuote): Promise<Api.Types.ShipmentQuoteResponse> {
+        return Api.Calls.ShipmentQuotes.create(this.authHeader, quote);
+    }
 }
 
 export default ShipCloudApi;

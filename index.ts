@@ -8,7 +8,7 @@ let api: IShipCloud;
 
 const display = (objects: any): void => {
     _.each(objects, obj => {
-         console.log(obj);
+        console.log(obj);
     });
 };
 
@@ -50,6 +50,11 @@ const createShipment = (shipment: Types.Shipment): Promise<Types.ShipmentRespons
     return api.createShipment(shipment);
 };
 
+const createShipmentQuote = (quote: Types.ShipmentQuote): Promise<Types.ShipmentQuoteResponse> => {
+    console.log(`Creating a new ShipmentQuote\r\n`);
+    return api.createShipmentQuote(quote);
+};
+
 const removeShipment = (id: string): Promise<any> => {
     console.log(`Removing Shipment with id ${id}\r\n`);
     return api.removeShipment(id);
@@ -57,17 +62,17 @@ const removeShipment = (id: string): Promise<any> => {
 
 const composeDummyAddress = (): Types.Address => {
     return <Types.Address>{
-       'company': 'ACME Company',
-       'first_name': 'Bugs',
-       'last_name': 'Bunny',
-       'care_of': null,
-       'street': 'Acme Street',
-       'street_no': '42',
-       'zip_code': '12345',
-       'city': 'Los Angeles',
-       'state': null,
-       'country': 'US',
-       'phone': '555-123',
+        'company': 'ACME Company',
+        'first_name': 'Bugs',
+        'last_name': 'Bunny',
+        'care_of': null,
+        'street': 'Acme Street',
+        'street_no': '42',
+        'zip_code': '12345',
+        'city': 'Los Angeles',
+        'state': null,
+        'country': 'US',
+        'phone': '555-123',
     };
 };
 
@@ -105,6 +110,33 @@ const composeShipment = (): Types.Shipment => {
     return shipment;
 };
 
+const composeShipmentQuote = (): Types.ShipmentQuote => {
+    return <Types.ShipmentQuote>{
+        carrier: 'dhl',
+        service: 'standard',
+        to: {
+            street: 'Beispielstrasse',
+            street_no: '42',
+            zip_code: '22100',
+            city: 'Hamburg',
+            country: 'DE'
+        },
+        from: {
+            street: 'Musterstrasse',
+            street_no: '23',
+            zip_code: '20148',
+            city: 'Hamburg',
+            country: 'DE'
+        },
+        package: {
+            weight: 1.5,
+            length: 20,
+            width: 20,
+            height: 20
+        }
+    };
+};
+
 const composeRate = (): Types.Rate => {
     return <Types.Rate>{
         carrier: 'dhl',
@@ -120,18 +152,29 @@ class Client {
         this.setup();
     }
     public run() {
+
         // getSingleAddress('ADDRESS_ID').then(res => {
         //     console.log(res);
         // });
+
         // createAddress(composeDummyAddress()).then(res => {
         //     console.log(res);
         // });
+
         // listKnownAddresses().then(res => console.log);
+
         // listAllCarriers();
-        getRateFor(composeRate());
+
+        // getRateFor(composeRate());
+
         // createShipment(composeShipment()).then(res => {
         //     console.log(res);
         // });
+
+        // createShipmentQuote(composeShipmentQuote()).then(res => {
+        //    console.log(res);
+        // });
+
         // removeShipment('SHIPMENT_ID');
 
     }
