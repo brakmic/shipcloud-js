@@ -6,13 +6,25 @@ import * as _ from 'lodash';
 
 let api: IShipCloud;
 
+const display = (objects: any): void => {
+    _.each(objects, obj => {
+         console.log(obj);
+    });
+};
+
 const listKnownAddresses = (): Promise<any> => {
     console.log(`Querying all known addresses\r\n`);
     return api.readAllAddresses().then((addresses: Types.AddressResponse[]) => {
         console.log(`Response received containing ${addresses.length} valid addresses.\r\n`);
-        _.each(addresses, address => {
-            console.log(address);
-        });
+        display(addresses);
+    });
+};
+
+const listAllCarriers = (): Promise<any> => {
+    console.log(`Querying all carriers\r\n`);
+    return api.readAllCarriers().then((carriers: Types.CarrierResponse[]) => {
+        console.log(`Response received containing ${carriers.length} valid carriers.\r\n`);
+        display(carriers);
     });
 };
 
@@ -97,7 +109,8 @@ class Client {
         // createAddress(composeDummyAddress()).then(res => {
         //     console.log(res);
         // });
-        listKnownAddresses().then(res => console.log);
+        // listKnownAddresses().then(res => console.log);
+        listAllCarriers();
         // createShipment(composeShipment()).then(res => {
         //     console.log(res);
         // });

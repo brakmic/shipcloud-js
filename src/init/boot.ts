@@ -10,5 +10,4 @@ import ShipCloudApi from './main';
     if (window) {
         (<any>window).ShipCloudApi = ShipCloudApi;
     }
-
 }());
