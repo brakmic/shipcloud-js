@@ -64,6 +64,11 @@ const createShipmentQuote = (quote: Api.Types.ShipmentQuote): Promise<Api.Types.
     return api.createShipmentQuote(quote);
 };
 
+const createTracker = (tracker: Api.Types.Tracker): Promise<Api.Types.TrackerResponse> => {
+    console.log(`Creating a new Tracker\r\n`);
+    return api.createTracker(tracker);
+};
+
 const createWebHook = (hook: Api.Types.WebHook): Promise<Api.Types.WebHookResponse> => {
     console.log(`Creating a new WebHook\r\n`);
     return api.createWebHook(hook);
@@ -182,6 +187,13 @@ const composeRate = (): Api.Types.Rate => {
     };
 };
 
+const composeTracker = (): Api.Types.Tracker => {
+    return <Api.Types.Tracker>{
+         carrier_tracking_no: '723558934169',
+         carrier: 'UPS'
+    };
+};
+
 const composeWebHook = (): Api.Types.WebHook => {
     return <Api.Types.WebHook>{
         url: 'https://example.com/webhook',
@@ -199,7 +211,7 @@ class Client {
 
         // createAddress(composeDummyAddress()).then(display);
 
-        // listKnownAddresses().then(displayCollection);
+        listKnownAddresses().then(displayCollection);
 
         // listAllCarriers();
 
@@ -210,6 +222,8 @@ class Client {
         // createShipment(composeShipment()).then(display);
 
         // createShipmentQuote(composeShipmentQuote()).then(display);
+
+        // createTracker(composeTracker()).then(display);
 
         // createWebHook(composeWebHook()).then(display);
 

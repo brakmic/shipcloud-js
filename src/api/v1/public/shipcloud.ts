@@ -4,10 +4,11 @@ import { Shipment } from '../types/shipment';
 import { ShipmentQuote } from '../types/shipment-quote';
 import { Pickup } from '../types/pickup';
 import { WebHook } from '../types/webhook';
+import { Tracker } from '../types/tracker';
 import { AddressResponse, ShipmentResponse,
          CarrierResponse, RateResponse,
          ShipmentQuoteResponse, PickupResponse,
-         WebHookResponse } from '../types/responses';
+         TrackerResponse, WebHookResponse } from '../types/responses';
 
 export interface IShipCloud {
     // Adresses
@@ -28,6 +29,10 @@ export interface IShipCloud {
     removeShipment: (id: string) => Promise<any>;
     // ShipmentQuotes
     createShipmentQuote: (quote: ShipmentQuote) => Promise<ShipmentQuoteResponse>;
+    // Trackers
+    createTracker: (tracker: Tracker) => Promise<TrackerResponse>;
+    readTracker: (id: string) => Promise<TrackerResponse>;
+    readAllTrackers: () => Promise<TrackerResponse[]>;
     // Webhooks
     createWebHook: (hook: WebHook) => Promise<WebHookResponse>;
     readWebHook: (id: string) => Promise<WebHookResponse>;

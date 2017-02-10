@@ -51,6 +51,16 @@ class ShipCloudApi implements Api.IShipCloud {
     public createShipmentQuote(quote: Api.Types.ShipmentQuote): Promise<Api.Types.ShipmentQuoteResponse> {
         return Api.Calls.ShipmentQuotes.create(this.authHeader, quote);
     }
+    // Trackers
+    public createTracker(tracker: Api.Types.Tracker): Promise<Api.Types.TrackerResponse> {
+        return Api.Calls.Trackers.create(this.authHeader, tracker);
+    }
+    public readTracker(id: string): Promise<Api.Types.TrackerResponse> {
+        return Api.Calls.Trackers.read(this.authHeader, id);
+    }
+    public readAllTrackers(): Promise<Api.Types.TrackerResponse[]> {
+        return Api.Calls.Trackers.readAll(this.authHeader);
+    }
     // Webhooks
     public readWebHook(id: string): Promise<Api.Types.WebHookResponse> {
         return Api.Calls.WebHooks.read(this.authHeader, id);
