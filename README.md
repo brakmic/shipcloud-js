@@ -2,8 +2,6 @@
 
 This project provides a complete mapping of [ShipCloud](https://www.shipcloud.io/)'s API. At [advarics](http://www.advarics.net/) we're currently evaluating their services and because our applications rely heavily on web technologies we've decided to create a proper JS API-binding. As far as we know there aren't any similar projects available. 
 
-**This projects is still in development. Some of the API Calls aren't implemented yet.**
-
 For a C++ version visit [this](https://github.com/brakmic/shipcloud-cpp) repo.
 
 ### Structure
