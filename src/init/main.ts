@@ -23,6 +23,10 @@ class ShipCloudApi implements Api.IShipCloud {
     public readAllCarriers(): Promise<Api.Types.CarrierResponse[]> {
         return Api.Calls.Carriers.readAll(this.authHeader);
     }
+    // Pickup Request
+    public createPickupRequest(pickup: Api.Types.Pickup): Promise<Api.Types.PickupResponse> {
+        return Api.Calls.PickupRequest.create(this.authHeader, pickup);
+    }
     // Rates [deprecated] => use "shipment quotes" instead
     public getRateFor(rate: Api.Types.Rate): Promise<Api.Types.RateResponse> {
         return Api.Calls.Rates.get(this.authHeader, rate);

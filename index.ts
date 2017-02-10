@@ -45,6 +45,11 @@ const createAddress = (address: Types.Address): Promise<Types.AddressResponse> =
     return api.createAddress(address);
 };
 
+const createPickupRequest = (pickup: Types.Pickup): Promise<Types.PickupResponse> => {
+    console.log(`Creating a new Pickup Request\r\n`);
+    return api.createPickupRequest(pickup);
+};
+
 const createShipment = (shipment: Types.Shipment): Promise<Types.ShipmentResponse> => {
     console.log(`Creating new Shipment\r\n`);
     return api.createShipment(shipment);
@@ -137,6 +142,27 @@ const composeShipmentQuote = (): Types.ShipmentQuote => {
     };
 };
 
+const composePickup = (): Types.Pickup => {
+    return <Types.Pickup>{
+        carrier: 'dpd',
+        pickup_time: {
+            earliest: '2015-09-15T09:00:00+02:00',
+            latest: '2015-09-15T18:00:00+02:00'
+        },
+        pickup_address: {
+            company: 'Muster-Company',
+            first_name: 'Max',
+            last_name: 'Mustermann',
+            street: 'Musterstraße',
+            street_no: '42',
+            zip_code: '54321',
+            city: 'Musterstadt',
+            country: 'DE',
+            phone: '555-555'
+        }
+    };
+};
+
 const composeRate = (): Types.Rate => {
     return <Types.Rate>{
         carrier: 'dhl',
@@ -164,6 +190,10 @@ class Client {
         // listKnownAddresses().then(res => console.log);
 
         // listAllCarriers();
+
+        // createPickupRequest(composePickup()).then(res => {
+        //     console.log(res);
+        // });
 
         // getRateFor(composeRate());
 

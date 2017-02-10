@@ -2,9 +2,10 @@ import { Address } from '../types/address';
 import { Rate } from '../types/rate';
 import { Shipment } from '../types/shipment';
 import { ShipmentQuote } from '../types/shipment-quote';
+import { Pickup } from '../types/pickup';
 import { AddressResponse, ShipmentResponse,
          CarrierResponse, RateResponse,
-         ShipmentQuoteResponse } from '../types/responses';
+         ShipmentQuoteResponse, PickupResponse } from '../types/responses';
 
 export interface IShipCloud {
     // Adresses
@@ -13,6 +14,8 @@ export interface IShipCloud {
     readAllAddresses: () => Promise<AddressResponse[]>;
     // Carriers
     readAllCarriers: () => Promise<CarrierResponse[]>;
+    // Pickup Requests
+    createPickupRequest: (request: Pickup) => Promise<PickupResponse>;
     // Rates [deprecated] => use "shipment quotes" instead
     getRateFor: (rate: Rate) => Promise<RateResponse>;
     // // Shipments
