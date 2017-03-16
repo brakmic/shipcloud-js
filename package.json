@@ -41,6 +41,12 @@
     "postversion": "git push && git push --tags"
   },
   "author": "Harris Brakmic",
+  "contributors": [
+    {
+      "name": "André Cedik",
+      "url": "https://github.com/andrecedik"
+    }
+  ],
   "license": "MIT",
   "devDependencies": {
     "@types/jasmine": "^2.5.43",
