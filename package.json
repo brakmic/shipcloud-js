@@ -1,7 +1,7 @@
 {
   "name": "shipcloud-js",
   "private": true,
-  "version": "0.0.1",
+  "version": "1.0.0",
   "description": "ShipCloud API for JS",
   "main": "index.js",
   "scripts": {
