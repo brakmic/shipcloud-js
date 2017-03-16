@@ -23,7 +23,8 @@
             "jquery",
             "source-map",
             "uglify-js",
-            "webpack"
+            "webpack",
+            "lodash"
         ]
     },
     "exclude": [
