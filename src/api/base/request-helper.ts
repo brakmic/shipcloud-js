@@ -25,7 +25,7 @@ const doPost = function <T>(url: string, data: T, headers: any = {}): Promise<an
         body: JSON.stringify(data),
         headers: allHeaders
     };
-    return fetch(url, request).then(response => {
+    return fetch(url, request as any).then(response => {
         return response.json();
     });
 };
@@ -39,7 +39,7 @@ const doPut = function <T>(url: string, data: T, headers: any = {}): Promise<any
         body: JSON.stringify(data),
         headers: allHeaders
     };
-    return fetch(url, request).then(response => {
+    return fetch(url, request as any).then(response => {
         return response.json();
     });
 };
@@ -52,7 +52,7 @@ const doDelete = function <T>(url: string, headers: any = {}): Promise<any> {
         redirect: 'follow',
         headers: allHeaders
     };
-    return fetch(url, request).then((response: Response) => {
+    return fetch(url, request as any).then((response: Response) => {
         return response.text();
     });
 };
