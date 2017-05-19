@@ -17,7 +17,7 @@ We use these fine open source packages and languages:
 
 However, to be able to communicate with the API you'll have [to register](https://developers.shipcloud.io/) first to obtain the free developer access keys. Then open **src/config.json** and put your keys in there.
 
-<img src="https://i.imgsafe.org/35ede348de.png" width="350" height="120">
+![shipcloud_keys](https://picload.org/image/rirpplgw/shipcloud_config.png)
 
 ### Api Structure 
 
@@ -137,10 +137,6 @@ npm run start:client
 
 Now a special node instance called **ts-node** will load **index.ts** to boot the API client. 
 
-Here's an example output:
-
-<img src="https://i.imgsafe.org/366113e56e.png" width="450">
-
 #### Browser Client 
 
 Type:
@@ -158,5 +154,3 @@ Copy this directory to your web server and open **index.html**.
 ### License 
 
 [MIT](https://github.com/brakmic/shipcloud-js/blob/master/LICENSE)
-
-<a href="http://www.advarics.net"><img src="https://i.imgsafe.org/36963687f2.png" width="150"></a>
